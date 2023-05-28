@@ -11,6 +11,11 @@ float vertices[] = {
     0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
     0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
 };
+float textureCoords[] = {
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    0.5f, 1.0f
+};
 unsigned int indices[] = {
     0,1,2
 };
@@ -63,7 +68,15 @@ int main() {
     glBindVertexArray(0);
 
     Shader rectangleShader("./shaders/squareShader.vs", "./shaders/squareShader.fs");
-    //render loop
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
     while(!glfwWindowShouldClose(window)){
         processInput(window);
 
