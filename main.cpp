@@ -7,24 +7,13 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 float vertices[] = {
-    0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
     0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f
+    0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
 };
 unsigned int indices[] = {
-    0,1,3,
-    1,2,3
+    0,1,2
 };
-const char *vertexShaderSource = "#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
-    "layout (location = 1) in vec3 aColor;\n"
-    "out vec3 myColor;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    "   myColor = aColor;\n"
-    "}\0";
 int main() {
     //GLFW
     glfwInit();
@@ -73,7 +62,7 @@ int main() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    Shader rectangleShader("./squareShader.vs", "./squareShader.fs");
+    Shader rectangleShader("./shaders/squareShader.vs", "./shaders/squareShader.fs");
     //render loop
     while(!glfwWindowShouldClose(window)){
         processInput(window);
